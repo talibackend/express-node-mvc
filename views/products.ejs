@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+</head>
+<body>
+    <style>
+        .table-cell{
+            border : solid 2px black;
+            padding : 5px;
+        }
+    </style>
+    <div class="main-container">
+        <div class="add-form">
+            <h2>Add Product</h2>
+            <% if(typeof(error) == "string"){ %>
+                <p style="color : red;"><%=error%></p>
+            <% } %>
+            <form action="/add-product" method="post">
+                <input type="text" name="name" value="<%if(typeof(name) == 'string'){%><%=name%><%}%>">
+                <input type="number" value="<%if(typeof(price) == 'number'){%><%=price %><%}%>" name="price">
+                <button type="submit">Add</button>
+            </form>
+        </div>
+        <div class="products">
+            <h2>Products</h2>
+            <table >
+                <tr style="font-weight: bolder;">
+                    <td class="table-cell">Name</td>
+                    <td class="table-cell">Price</td>
+                    <td class="table-cell">Created</td>
+                </tr>
+                <% for(let i = 0; i < products.length; i++){ %>
+                    <tr>
+                        <td class="table-cell"><%= products[i].name %></td>
+                        <td class="table-cell">$<%= products[i].price %></td>
+                        <td class="table-cell"><%= products[i].createdAt %></td>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
